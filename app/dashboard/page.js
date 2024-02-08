@@ -3,6 +3,7 @@ import styles from '../ui/dashboard/dashboard.module.css'
 import Card from '../ui/dashboard/card/card'
 import Transactions from '../ui/dashboard/transactions/transactions'
 import Chart from '../ui/dashboard/chart/chart'
+import Rightbar from '../ui/dashboard/rightbar/rightbar'
 export default function Dashboard() {
   return (
     <div className={styles.wrapper}>
@@ -16,7 +17,7 @@ export default function Dashboard() {
       <Chart />
     </div>
     <div className={styles.side}>
-      Rightbar
+      <Rightbar/>
     </div>
   </div>
   )
