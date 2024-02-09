@@ -47,7 +47,7 @@ export default function Products() {
             <td>Admin</td>
             <td>23</td>
             <td className={styles.buttons}>
-              <Link href='/' >
+              <Link href='/dashboard/products/test' >
                 <button className={`${styles.button} ${styles.view}`}>View</button>
               </Link>  
                 <button className={`${styles.button} ${styles.delete}`}>Delete</button>
