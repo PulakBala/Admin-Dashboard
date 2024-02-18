@@ -1,7 +1,6 @@
-import React from 'react'
 import styles from '@/app/ui/dashboard/products/addProducts/addProducts.module.css'
-import addUser from '@/app/lib/action'
-export default function AddUser() {
+import {addUser} from '@/app/lib/action'
+const  AddUser =()=> {
   return (
     <div className={styles.container}>
     <form action={addUser} className={styles.form}>
@@ -36,3 +35,4 @@ export default function AddUser() {
   </div>
   )
 }
+export default AddUser;

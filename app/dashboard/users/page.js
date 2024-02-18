@@ -5,6 +5,7 @@ import styles from "@/app/ui/dashboard/users/users.module.css";
 import Search from "@/app/ui/dashboard/search/page";
 import Pagination from "@/app/ui/dashboard/pagination/pagination";
 import { fetchUsers } from "@/app/lib/data";
+import { deleteUser } from "@/app/lib/action";
 export default async function UsersPage({ searchParams }) {
   const q = searchParams?.q || "";
   const page = searchParams?.page || 1;
@@ -55,7 +56,12 @@ export default async function UsersPage({ searchParams }) {
                       View
                     </button>
                   </Link>
-                 
+                  <form action={deleteUser}>
+                    <input type="hidden" name="id" value={user.id} />
+                    <button className={`${styles.button} ${styles.delete}`}>
+                      Delete
+                    </button>
+                </form>
                 </div>
               </td>
             </tr>
