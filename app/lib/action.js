@@ -4,6 +4,7 @@ import { connectToDB } from './utlis';
 // const bcrypt = require('bcrypt');
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache'
+import Products from '../dashboard/products/page';
 
 export const  addUser = async (formData) => {
   
@@ -112,4 +113,31 @@ export const updateUser = async (formData) => {
     revalidatePath("/dashboard/users");
     redirect("/dashboard/users");
   };
+
+  export const updateProduct = async (formData) => {
+    const { id, title, desc, price, stock, color, size } =
+      Object.fromEntries(formData);
+  
+    try {
+      connectToDB();
+  
+      const updateFields = {
+        id, title, desc, price, stock, color, size
+      };
+  
+      Object.keys(updateFields).forEach(
+        (key) =>
+          (updateFields[key] === "" || undefined) && delete updateFields[key]
+      );
+  
+      await Product.findByIdAndUpdate(id, updateFields);
+    } catch (err) {
+      console.log(err);
+      throw new Error("Failed to update user!");
+    }
+  
+    revalidatePath("/dashboard/products");
+    redirect("/dashboard/products");
+  };
+  
   
