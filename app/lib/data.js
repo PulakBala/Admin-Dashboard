@@ -56,3 +56,4 @@ export const fetchProducts = async (q, page) => {
       throw new Error("Failed to fetch user!");
     }
   };
+

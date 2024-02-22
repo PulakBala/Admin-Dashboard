@@ -5,17 +5,19 @@ import { connectToDB } from './utlis';
 import { redirect } from 'next/navigation';
 import { revalidatePath } from 'next/cache'
 import Products from '../dashboard/products/page';
+import { signIn } from '../auth';
 
 export const  addUser = async (formData) => {
   
     const {username, email, password, phone, address, isAdmin, isActive} = Object.fromEntries(formData);
     // const hashedPassword = await bcrypt.hash(password, 10);
+    const hashedPassword = await bcrypt.hash(password, salt);
     try{
         connectToDB();
         const newUser = new User({
             username, 
             email, 
-            password, 
+            password: hashedPassword,
             phone, 
             address, 
             isAdmin, 
@@ -140,4 +142,15 @@ export const updateUser = async (formData) => {
     redirect("/dashboard/products");
   };
   
+  export const authenticate = async (prevState, formData) => {
+    const { username, password } = Object.fromEntries(formData);
   
+    try {
+      await signIn("credentials", { username, password });
+    } catch (err) {
+      if (err.message.includes("CredentialsSignin")) {
+        return "Wrong Credentials";
+      }
+      throw err;
+    }
+  };
